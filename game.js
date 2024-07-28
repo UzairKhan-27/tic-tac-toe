@@ -1,9 +1,7 @@
 function createGameBoard()
 {
-    let row1=["","",""];
-    let row2=["","",""];
-    let row3=["","",""];
-    return {row1,row2,row3};
+    let row=["","","","","","","","",""];
+    return {row};
 };
 function createPlayer(name,mark,gameBoard)
 {
@@ -11,13 +9,10 @@ function createPlayer(name,mark,gameBoard)
     let choice=0
     const playTurn=()=>{
         choice=prompt(`Turn of ${name}`);
-        if(choice==="1" || choice==="2" || choice==="3" )
-            gameBoard.row1[choice-1]=mark;
-        else if(choice==="4" || choice==="5" || choice==="6" )
-            gameBoard.row2[choice-4]=mark;
-        else if(choice==="7" || choice==="8" || choice==="9" )
-            gameBoard.row3[choice-7]=mark;
-        
+        if(gameBoard.row[choice-1]==="")
+            gameBoard.row[choice-1]=mark;
+        else
+            playTurn();
         console.log(gameBoard);
         
     }
@@ -26,13 +21,41 @@ function createPlayer(name,mark,gameBoard)
 }
 function playGame()
 {
+    let result=0;
     let gameBoard=createGameBoard();
     const player1=createPlayer("Uzair","x",gameBoard);
     const player2=createPlayer("Yahya","o",gameBoard);
-    player1.playTurn();
-    console.log(player1.getTurn());
-    player2.playTurn();
-    console.log(player2.getTurn());
+    while(result===0)
+    {
+        let getResult=()=>{
+            if((        gameBoard.row[0]===gameBoard.row[1] && gameBoard.row[0]===gameBoard.row[2] && gameBoard.row[0]!=="")
+                    || (gameBoard.row[3]===gameBoard.row[4] && gameBoard.row[3]===gameBoard.row[5] && gameBoard.row[3]!=="")
+                    || (gameBoard.row[6]===gameBoard.row[7] && gameBoard.row[6]===gameBoard.row[8] && gameBoard.row[6]!=="")
+
+                    || (gameBoard.row[0]===gameBoard.row[3] && gameBoard.row[0]===gameBoard.row[6] && gameBoard.row[0]!=="")
+                    || (gameBoard.row[1]===gameBoard.row[4] && gameBoard.row[1]===gameBoard.row[7] && gameBoard.row[1]!=="")
+                    || (gameBoard.row[2]===gameBoard.row[5] && gameBoard.row[2]===gameBoard.row[8] && gameBoard.row[2]!=="")
+
+                    || (gameBoard.row[0]===gameBoard.row[4] && gameBoard.row[0]===gameBoard.row[8] && gameBoard.row[0]!=="")
+                    || (gameBoard.row[2]===gameBoard.row[4] && gameBoard.row[2]===gameBoard.row[6] && gameBoard.row[2]!=="")
+                    )
+                return 1;
+            else
+                return 0;
+        };
+        player1.playTurn();
+        result=getResult();
+        if (result!==0)
+            break;
+        console.log(player1.getTurn());
+        player2.playTurn();
+        result=getResult();
+        if (result!==0)
+            break;
+        console.log(player2.getTurn());
+    }
+    return{gameBoard};
     
 }
-playGame();
+let start=playGame();
+console.log(start.gameBoard);
