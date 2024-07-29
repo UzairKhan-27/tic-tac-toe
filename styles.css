@@ -8,6 +8,12 @@
 a
 {
     background-color: lightblue;
+    color: maroon;
+    font-size: 4rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex   ;
     border-right: solid 2px black;
     border-bottom: solid 2px black;
 }
