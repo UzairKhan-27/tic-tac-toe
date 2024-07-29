@@ -1,9 +1,24 @@
+body
+{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 .game-board
 {
     display: grid;
     grid-template-columns: 100px 100px 100px;
     grid-template-rows: 100px 100px 100px;
     justify-content: center;
+}
+button#start-game
+{
+    color: rebeccapurple;
+    align-self: center;
+    width: -moz-fit-content;
+    width: fit-content;
+    
 }
 a
 {
@@ -24,4 +39,14 @@ a
 [id="7"],[id="8"],[id="9"]
 {
     border-bottom: none;
+}
+dialog
+{
+    transform: scale(1.5);
+}
+form
+{
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
 }
