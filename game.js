@@ -60,6 +60,9 @@ function screenController()
 {
     let correct=0;
     let container=document.querySelector(".game-board");
+    const scoreBoard=document.querySelector(".scores");
+    const displayPlayerOneName=document.querySelector(".player1-display");
+    const displayPlayerTwoName=document.querySelector(".player2-display");
     const displayPlayerOneScore=document.querySelector(".player1-score");
     const displayPlayerTwoScore=document.querySelector(".player2-score");
     let startGameButton=document.querySelector("#start-game");
@@ -73,6 +76,9 @@ function screenController()
         let playerTwoName=document.getElementById("player2-name").value;
         start.player1.name=playerOneName;
         start.player2.name=playerTwoName;
+        displayPlayerOneName.textContent=start.player1.name;
+        displayPlayerTwoName.textContent=start.player2.name;
+        scoreBoard.style.display="block";
         console.log(start.player1.name);
         console.log(start.player2.name);
         container.style.display="grid";
@@ -105,11 +111,19 @@ function screenController()
                 else if(winner===start.player2.name)
                     start.player2.incrementPlayerScore();
                 alert(`Winner is ${winner}`);
+                playerSelectedBox.forEach(item=> 
+                    {
+                        item.removeEventListener("click",handlePlayerSelection);
+                    });
                 container.appendChild(playAgain);
             }
             else if(start.checkForDraw()===true)
             {
                 alert("draw");
+                playerSelectedBox.forEach(item=> 
+                    {
+                        item.removeEventListener("click",handlePlayerSelection);
+                    });
                 container.appendChild(playAgain);
             }
             start.turnOfPlayer=!start.turnOfPlayer;
@@ -135,6 +149,10 @@ function screenController()
                 {
                     start.gameBoard.row[i]="";
                 }
+            playerSelectedBox.forEach(item=> 
+                {
+                    item.addEventListener("click",handlePlayerSelection);
+                });
             correct=0;
             start.turnOfPlayer=false;
         });
