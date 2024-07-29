@@ -65,6 +65,8 @@ function playGame()
 function screenController()
 {
     let start=playGame();
+    const playAgain=document.createElement("button");
+    playAgain.textContent="Play Again";
     console.log(start.gameBoard);
     let correct=0;
     let container=document.querySelector(".game-board");
@@ -89,24 +91,16 @@ function screenController()
                     {
                         item.removeEventListener("click",handlePlayerSelection);
                     });
-                const playAgain=document.createElement("button");
-                playAgain.textContent="Play Again";
                 container.appendChild(playAgain);
-
-                playAgain.addEventListener("click",event=>
-                {
-                    playerSelectedBox.forEach(item=> 
-                        {
-                            item.textContent="";
-                        });
-                    playAgain.remove();
-                    screenController();
-                });
-                
             }
             else if(start.checkForDraw()===true)
             {
                 alert("draw");
+                playerSelectedBox.forEach(item=> 
+                    {
+                        item.removeEventListener("click",handlePlayerSelection);
+                    });
+                container.appendChild(playAgain);
             }
             start.turnOfPlayer=!start.turnOfPlayer;
         }
@@ -118,6 +112,16 @@ function screenController()
     {
         item.addEventListener("click",handlePlayerSelection);
     });
+
+    playAgain.addEventListener("click",event=>
+        {
+            playerSelectedBox.forEach(item=> 
+                {
+                    item.textContent="";
+                });
+            playAgain.remove();
+            screenController();
+        });
 };
 
 screenController();
