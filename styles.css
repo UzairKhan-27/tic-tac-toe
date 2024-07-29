@@ -5,6 +5,10 @@ body
     flex-direction: column;
     gap: 1.5rem;
 }
+.scores
+{
+    display: none;
+}
 .game-board
 {
     display: none;
