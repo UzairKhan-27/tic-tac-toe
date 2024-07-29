@@ -83,12 +83,15 @@ function screenController()
         console.log(start.player2.name);
         container.style.display="grid";
         form.close();
+        startGameButton.style.display="none";
     });
     
     let playerSelectedBox=document.querySelectorAll("a");
     let start=playGame();
     const playAgain=document.createElement("button");
     playAgain.textContent="Play Again";
+    const backButton=document.createElement("button");
+    backButton.textContent="Main Menu";
     console.log(start.gameBoard);
     
 
@@ -116,6 +119,7 @@ function screenController()
                         item.removeEventListener("click",handlePlayerSelection);
                     });
                 container.appendChild(playAgain);
+                container.appendChild(backButton);
             }
             else if(start.checkForDraw()===true)
             {
@@ -125,6 +129,7 @@ function screenController()
                         item.removeEventListener("click",handlePlayerSelection);
                     });
                 container.appendChild(playAgain);
+                container.appendChild(backButton);
             }
             start.turnOfPlayer=!start.turnOfPlayer;
         }
@@ -139,23 +144,29 @@ function screenController()
     });
 
     playAgain.addEventListener("click",event=>
-        {
-            playerSelectedBox.forEach(item=> 
-                {
-                    item.textContent="";
-                });
-            playAgain.remove();
-            for(let i=0;i<9;i++)
-                {
-                    start.gameBoard.row[i]="";
-                }
-            playerSelectedBox.forEach(item=> 
-                {
-                    item.addEventListener("click",handlePlayerSelection);
-                });
-            correct=0;
-            start.turnOfPlayer=false;
-        });
+    {
+        backButton.remove();
+        playerSelectedBox.forEach(item=> 
+            {
+                item.textContent="";
+            });
+        playAgain.remove();
+        for(let i=0;i<9;i++)
+            {
+                start.gameBoard.row[i]="";
+            }
+        playerSelectedBox.forEach(item=> 
+            {
+                item.addEventListener("click",handlePlayerSelection);
+            });
+        correct=0;
+        start.turnOfPlayer=false;
+    });
+
+    backButton.addEventListener("click",event=>{
+        window.location.reload(true);
+    })
+
 };
 
 screenController();
