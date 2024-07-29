@@ -60,11 +60,18 @@ function screenController()
 {
     let correct=0;
     let container=document.querySelector(".game-board");
+    const body=document.querySelector(".container-bottom");
     const scoreBoard=document.querySelectorAll(".scores");
     const displayPlayerOneName=document.querySelector(".player1-display");
     const displayPlayerTwoName=document.querySelector(".player2-display");
     const displayPlayerOneScore=document.querySelector(".player1-score");
     const displayPlayerTwoScore=document.querySelector(".player2-score");
+    const playAgain=document.createElement("button");
+    const backButton=document.createElement("button");
+    playAgain.textContent="Play Again";
+    backButton.textContent="Main Menu";
+    backButton.classList.add("main-menu");
+    playAgain.classList.add("play-again");
     let startGameButton=document.querySelector("#start-game");
     let submitFormButton=document.querySelector("#submit");
     let form=document.querySelector("dialog");
@@ -89,10 +96,6 @@ function screenController()
     
     let playerSelectedBox=document.querySelectorAll("a");
     let start=playGame();
-    const playAgain=document.createElement("button");
-    playAgain.textContent="Play Again";
-    const backButton=document.createElement("button");
-    backButton.textContent="Main Menu";
     console.log(start.gameBoard);
     
 
@@ -119,8 +122,8 @@ function screenController()
                     {
                         item.removeEventListener("click",handlePlayerSelection);
                     });
-                container.appendChild(playAgain);
-                container.appendChild(backButton);
+                body.appendChild(playAgain);
+                body.appendChild(backButton);
             }
             else if(start.checkForDraw()===true)
             {
@@ -129,8 +132,8 @@ function screenController()
                     {
                         item.removeEventListener("click",handlePlayerSelection);
                     });
-                container.appendChild(playAgain);
-                container.appendChild(backButton);
+                body.appendChild(playAgain);
+                body.appendChild(backButton);
             }
             start.turnOfPlayer=!start.turnOfPlayer;
         }
