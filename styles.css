@@ -12,24 +12,26 @@ body
 .game-board
 {
     display: none;
-    grid-template-columns: 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px;
+    grid-template-columns: 150px 150px 150px;
+    grid-template-rows: 150px 150px 150px;
     justify-content: center;
 }
 button#start-game
 {
     color: rebeccapurple;
-    align-self: center;
     width: -moz-fit-content;
     width: fit-content;
-    
+    align-self: center;
+    font-size: 7rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    margin: auto;
 }
 a
 {
     background-color: lightblue;
     color: maroon;
-    font-size: 4rem;
-    text-align: center;
+    font-size: 10rem;
     justify-content: center;
     align-items: center;
     display: flex   ;
@@ -46,7 +48,7 @@ a
 }
 dialog
 {
-    transform: scale(1.5);
+    transform: scale(2);
 }
 form
 {
