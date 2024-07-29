@@ -4,10 +4,32 @@ body
     height: 100vh;
     flex-direction: column;
     gap: 1.5rem;
+    background-color: lightseagreen;
+}
+.container
+{
+    margin: auto 0;
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
 }
 .scores
 {
     display: none;
+    flex-direction: column;
+    gap: 5rem;
+    /* justify-content: center; */
+}
+.player1-display,.player2-display
+{
+    font-size: 3rem;
+    font-weight: bold;
+}
+.player1-score,.player2-score
+{
+    font-size: 3rem;
+    font-weight: 500;
+    align-self: center;
 }
 .game-board
 {
@@ -27,11 +49,23 @@ button#start-game
     border-radius: 1rem;
     margin: auto;
 }
+.main-menu,.play-again
+{
+    font-size: 1.3rem;
+    padding: 1rem;
+}
+.container-bottom
+{
+    display: flex;
+    justify-content: center;
+    gap: 300px;
+    margin: auto;
+}
 a
 {
     background-color: lightblue;
     color: maroon;
-    font-size: 10rem;
+    font-size: 8rem;
     justify-content: center;
     align-items: center;
     display: flex   ;
