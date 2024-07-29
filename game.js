@@ -24,7 +24,7 @@ function playGame()
     let gameBoard=createGameBoard();
     const player1=createPlayer("Uzair","x",gameBoard);
     const player2=createPlayer("Yahya","o",gameBoard);
-    let getResult=()=>{
+    let checkForWinner=()=>{
         if((        gameBoard.row[0]===gameBoard.row[1] && gameBoard.row[0]===gameBoard.row[2] && gameBoard.row[0]!=="")
                 || (gameBoard.row[3]===gameBoard.row[4] && gameBoard.row[3]===gameBoard.row[5] && gameBoard.row[3]!=="")
                 || (gameBoard.row[6]===gameBoard.row[7] && gameBoard.row[6]===gameBoard.row[8] && gameBoard.row[6]!=="")
@@ -48,17 +48,7 @@ function playGame()
         }
         return true;
     }
-    function playerTurn()
-    {
-        player1.playTurn();
-        result=getResult();
-        console.log("playerTurn "+player1.getTurn());
-        player2.playTurn();
-        result=getResult();
-        if (result!==0)
-        console.log("playerTurn "+player2.getTurn());
-    }
-    return{gameBoard,player1,player2,result,getResult,checkForDraw,turnOfPlayer};
+    return{gameBoard,player1,player2,result,checkForWinner,checkForDraw,turnOfPlayer};
     
 };
 
@@ -83,7 +73,7 @@ function screenController()
         if(correct!==-1)
         {
             event.target.textContent=(start.turnOfPlayer===false) ? start.player1.mark : start.player2.mark;
-            if(start.getResult()===1)
+            if(start.checkForWinner()===1)
             {
                 let winner=(start.turnOfPlayer===false) ? start.player1.name : start.player2.name
                 alert(`Winner is ${winner}`);
