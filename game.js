@@ -6,14 +6,13 @@ function createGameBoard()
 function createPlayer(name,mark,gameBoard)
 {
     
-    let choice=0
-    const playTurn=()=>{
-        if(gameBoard.row[choice-1]==="")
-            gameBoard.row[choice-1]=mark;
+    const playTurn=(playerSelection)=>{
+        if(gameBoard.row[playerSelection-1]==="")
+            gameBoard.row[playerSelection-1]=mark;
         else
-            playTurn();
+            return -1;
         console.log(gameBoard);
-        
+        return 1;
     }
     const getTurn=()=>choice;
     return{name,mark,playTurn,getTurn};
@@ -21,6 +20,7 @@ function createPlayer(name,mark,gameBoard)
 function playGame()
 {
     let result=0;
+    let turnOfPlayer=false;
     let gameBoard=createGameBoard();
     const player1=createPlayer("Uzair","x",gameBoard);
     const player2=createPlayer("Yahya","o",gameBoard);
@@ -50,7 +50,7 @@ function playGame()
         if (result!==0)
         console.log("playerTurn "+player2.getTurn());
     }
-    return{gameBoard,player1,player2,result,getResult};
+    return{gameBoard,player1,player2,result,getResult,turnOfPlayer};
     
 };
 
@@ -58,13 +58,30 @@ function screenController()
 {
     let start=playGame();
     console.log(start.gameBoard);
-    
+    let correct=0;
     let playerSelectedBox=document.querySelectorAll("a");
     playerSelectedBox.forEach(item=> 
     {
         item.addEventListener("click",event =>
         {
             console.log(event.target.id);
+            if(start.turnOfPlayer===false)
+                correct=start.player1.playTurn(event.target.id);
+            else
+                correct=start.player2.playTurn(event.target.id);
+            console.log(start.gameBoard);
+            if(correct!==-1)
+            {
+                item.textContent=(start.turnOfPlayer===false) ? start.player1.mark : start.player2.mark;
+                if(start.getResult()===1)
+                {
+                    let winner=(start.turnOfPlayer===false) ? start.player1.name : start.player2.name
+                    alert(`Winner is ${winner}`);
+                }
+                start.turnOfPlayer=!start.turnOfPlayer;
+            }
+            console.log("turn of player "+start.turnOfPlayer);
+            correct=0;
         });
     });
 };
