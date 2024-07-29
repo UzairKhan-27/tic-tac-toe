@@ -25,8 +25,8 @@ function playGame()
     let result=0;
     let turnOfPlayer=false;
     let gameBoard=createGameBoard();
-    const player1=createPlayer("Player1","x",gameBoard);
-    const player2=createPlayer("Player2","o",gameBoard);
+    const player1=createPlayer("Player1","X",gameBoard);
+    const player2=createPlayer("Player2","O",gameBoard);
 
     let checkForWinner=()=>{
         if((        gameBoard.row[0]===gameBoard.row[1] && gameBoard.row[0]===gameBoard.row[2] && gameBoard.row[0]!=="")
@@ -60,7 +60,7 @@ function screenController()
 {
     let correct=0;
     let container=document.querySelector(".game-board");
-    const scoreBoard=document.querySelector(".scores");
+    const scoreBoard=document.querySelectorAll(".scores");
     const displayPlayerOneName=document.querySelector(".player1-display");
     const displayPlayerTwoName=document.querySelector(".player2-display");
     const displayPlayerOneScore=document.querySelector(".player1-score");
@@ -76,9 +76,10 @@ function screenController()
         let playerTwoName=document.getElementById("player2-name").value;
         start.player1.name=playerOneName;
         start.player2.name=playerTwoName;
-        displayPlayerOneName.textContent=start.player1.name;
-        displayPlayerTwoName.textContent=start.player2.name;
-        scoreBoard.style.display="block";
+        displayPlayerOneName.textContent=start.player1.name + " (" +start.player1.mark +")" ;
+        displayPlayerTwoName.textContent=start.player2.name + " (" +start.player2.mark +")" ;
+        scoreBoard[0].style.display="flex";
+        scoreBoard[1].style.display="flex";
         console.log(start.player1.name);
         console.log(start.player2.name);
         container.style.display="grid";
