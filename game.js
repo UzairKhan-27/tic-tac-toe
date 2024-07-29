@@ -55,14 +55,32 @@ function playGame()
 function screenController()
 {
     let correct=0;
-    let container=document.querySelector(".game-board");
-    container.style.display="none";
+    let container=document.querySelector(".game-board"); container.style.display="none";
+    let startGameButton=document.querySelector("#start-game");
+    let submitFormButton=document.querySelector("#submit");
+    let form=document.querySelector("dialog");
+    startGameButton.addEventListener("click",event=>{
+        form.showModal();
+    });
+    submitFormButton.addEventListener("click",event=>{
+        let playerOneName=document.getElementById("player1-name").value;
+        let playerTwoName=document.getElementById("player2-name").value;
+        console.log(playerOneName);
+        console.log(playerTwoName);
+        form.close();
+    });
+    
+    
     let playerSelectedBox=document.querySelectorAll("a");
     let start=playGame();
     const playAgain=document.createElement("button");
     playAgain.textContent="Play Again";
     console.log(start.gameBoard);
     
+
+
+
+
     function handlePlayerSelection(event)
     {
         console.log(event.target.id);
