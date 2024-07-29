@@ -6,6 +6,9 @@ function createGameBoard()
 function createPlayer(name,mark,gameBoard)
 {
     
+    let playerScore=0;
+    let incrementPlayerScore=()=>playerScore++;
+    let getPlayerScore=()=>playerScore;
     const playTurn=(playerSelection)=>{
         if(gameBoard.row[playerSelection-1]==="")
             gameBoard.row[playerSelection-1]=mark;
@@ -15,7 +18,7 @@ function createPlayer(name,mark,gameBoard)
         return 1;
     }
     const getTurn=()=>choice;
-    return{name,mark,playTurn,getTurn};
+    return{name,mark,playTurn,getTurn,incrementPlayerScore,getPlayerScore,playerScore};
 }
 function playGame()
 {
@@ -24,6 +27,7 @@ function playGame()
     let gameBoard=createGameBoard();
     const player1=createPlayer("Player1","x",gameBoard);
     const player2=createPlayer("Player2","o",gameBoard);
+
     let checkForWinner=()=>{
         if((        gameBoard.row[0]===gameBoard.row[1] && gameBoard.row[0]===gameBoard.row[2] && gameBoard.row[0]!=="")
                 || (gameBoard.row[3]===gameBoard.row[4] && gameBoard.row[3]===gameBoard.row[5] && gameBoard.row[3]!=="")
@@ -55,7 +59,9 @@ function playGame()
 function screenController()
 {
     let correct=0;
-    let container=document.querySelector(".game-board"); container.style.display="none";
+    let container=document.querySelector(".game-board");
+    const displayPlayerOneScore=document.querySelector(".player1-score");
+    const displayPlayerTwoScore=document.querySelector(".player2-score");
     let startGameButton=document.querySelector("#start-game");
     let submitFormButton=document.querySelector("#submit");
     let form=document.querySelector("dialog");
@@ -69,10 +75,9 @@ function screenController()
         start.player2.name=playerTwoName;
         console.log(start.player1.name);
         console.log(start.player2.name);
-        container.style.display="";
+        container.style.display="grid";
         form.close();
     });
-    
     
     let playerSelectedBox=document.querySelectorAll("a");
     let start=playGame();
@@ -80,9 +85,6 @@ function screenController()
     playAgain.textContent="Play Again";
     console.log(start.gameBoard);
     
-
-
-
 
     function handlePlayerSelection(event)
     {
@@ -98,25 +100,22 @@ function screenController()
             if(start.checkForWinner()===1)
             {
                 let winner=(start.turnOfPlayer===false) ? start.player1.name : start.player2.name
+                if(winner===start.player1.name)
+                    start.player1.incrementPlayerScore();
+                else if(winner===start.player2.name)
+                    start.player2.incrementPlayerScore();
                 alert(`Winner is ${winner}`);
-                playerSelectedBox.forEach(item=> 
-                    {
-                        item.removeEventListener("click",handlePlayerSelection);
-                    });
                 container.appendChild(playAgain);
             }
             else if(start.checkForDraw()===true)
             {
                 alert("draw");
-                playerSelectedBox.forEach(item=> 
-                    {
-                        item.removeEventListener("click",handlePlayerSelection);
-                    });
                 container.appendChild(playAgain);
             }
             start.turnOfPlayer=!start.turnOfPlayer;
         }
-        console.log("turn of player "+start.turnOfPlayer);
+        displayPlayerOneScore.textContent=start.player1.getPlayerScore();
+        displayPlayerTwoScore.textContent=start.player2.getPlayerScore();
         correct=0;
     }
 
@@ -132,7 +131,12 @@ function screenController()
                     item.textContent="";
                 });
             playAgain.remove();
-            screenController();
+            for(let i=0;i<9;i++)
+                {
+                    start.gameBoard.row[i]="";
+                }
+            correct=0;
+            start.turnOfPlayer=false;
         });
 };
 
