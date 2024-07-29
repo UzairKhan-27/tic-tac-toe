@@ -40,6 +40,14 @@ function playGame()
         else
             return 0;
     };
+    let checkForDraw=()=>{
+        for(let i=0;i<9;i++)
+        {
+            if(gameBoard.row[i]==="")
+                return false;
+        }
+        return true;
+    }
     function playerTurn()
     {
         player1.playTurn();
@@ -50,7 +58,7 @@ function playGame()
         if (result!==0)
         console.log("playerTurn "+player2.getTurn());
     }
-    return{gameBoard,player1,player2,result,getResult,turnOfPlayer};
+    return{gameBoard,player1,player2,result,getResult,checkForDraw,turnOfPlayer};
     
 };
 
@@ -59,30 +67,56 @@ function screenController()
     let start=playGame();
     console.log(start.gameBoard);
     let correct=0;
+    let container=document.querySelector(".game-board");
     let playerSelectedBox=document.querySelectorAll("a");
+    
+    function handlePlayerSelection(event)
+    {
+        console.log(event.target.id);
+        if(start.turnOfPlayer===false)
+            correct=start.player1.playTurn(event.target.id);
+        else
+            correct=start.player2.playTurn(event.target.id);
+        console.log(start.gameBoard);
+        if(correct!==-1)
+        {
+            event.target.textContent=(start.turnOfPlayer===false) ? start.player1.mark : start.player2.mark;
+            if(start.getResult()===1)
+            {
+                let winner=(start.turnOfPlayer===false) ? start.player1.name : start.player2.name
+                alert(`Winner is ${winner}`);
+                playerSelectedBox.forEach(item=> 
+                    {
+                        item.removeEventListener("click",handlePlayerSelection);
+                    });
+                const playAgain=document.createElement("button");
+                playAgain.textContent="Play Again";
+                container.appendChild(playAgain);
+
+                playAgain.addEventListener("click",event=>
+                {
+                    playerSelectedBox.forEach(item=> 
+                        {
+                            item.textContent="";
+                        });
+                    playAgain.remove();
+                    screenController();
+                });
+                
+            }
+            else if(start.checkForDraw()===true)
+            {
+                alert("draw");
+            }
+            start.turnOfPlayer=!start.turnOfPlayer;
+        }
+        console.log("turn of player "+start.turnOfPlayer);
+        correct=0;
+    }
+
     playerSelectedBox.forEach(item=> 
     {
-        item.addEventListener("click",event =>
-        {
-            console.log(event.target.id);
-            if(start.turnOfPlayer===false)
-                correct=start.player1.playTurn(event.target.id);
-            else
-                correct=start.player2.playTurn(event.target.id);
-            console.log(start.gameBoard);
-            if(correct!==-1)
-            {
-                item.textContent=(start.turnOfPlayer===false) ? start.player1.mark : start.player2.mark;
-                if(start.getResult()===1)
-                {
-                    let winner=(start.turnOfPlayer===false) ? start.player1.name : start.player2.name
-                    alert(`Winner is ${winner}`);
-                }
-                start.turnOfPlayer=!start.turnOfPlayer;
-            }
-            console.log("turn of player "+start.turnOfPlayer);
-            correct=0;
-        });
+        item.addEventListener("click",handlePlayerSelection);
     });
 };
 
