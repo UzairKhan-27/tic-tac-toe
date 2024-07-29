@@ -56,10 +56,17 @@ function playGame()
 
 function screenController()
 {
-    const playerSelectionBox=document.querySelectorAll("a");
     let start=playGame();
     console.log(start.gameBoard);
-    console.log(start.player1.name);
+    
+    let playerSelectedBox=document.querySelectorAll("a");
+    playerSelectedBox.forEach(item=> 
+    {
+        item.addEventListener("click",event =>
+        {
+            console.log(event.target.id);
+        });
+    });
 };
 
 screenController();
