@@ -54,13 +54,14 @@ function playGame()
 
 function screenController()
 {
+    let correct=0;
+    let container=document.querySelector(".game-board");
+    container.style.display="none";
+    let playerSelectedBox=document.querySelectorAll("a");
     let start=playGame();
     const playAgain=document.createElement("button");
     playAgain.textContent="Play Again";
     console.log(start.gameBoard);
-    let correct=0;
-    let container=document.querySelector(".game-board");
-    let playerSelectedBox=document.querySelectorAll("a");
     
     function handlePlayerSelection(event)
     {
