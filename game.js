@@ -22,8 +22,8 @@ function playGame()
     let result=0;
     let turnOfPlayer=false;
     let gameBoard=createGameBoard();
-    const player1=createPlayer("Uzair","x",gameBoard);
-    const player2=createPlayer("Yahya","o",gameBoard);
+    const player1=createPlayer("Player1","x",gameBoard);
+    const player2=createPlayer("Player2","o",gameBoard);
     let checkForWinner=()=>{
         if((        gameBoard.row[0]===gameBoard.row[1] && gameBoard.row[0]===gameBoard.row[2] && gameBoard.row[0]!=="")
                 || (gameBoard.row[3]===gameBoard.row[4] && gameBoard.row[3]===gameBoard.row[5] && gameBoard.row[3]!=="")
@@ -65,8 +65,11 @@ function screenController()
     submitFormButton.addEventListener("click",event=>{
         let playerOneName=document.getElementById("player1-name").value;
         let playerTwoName=document.getElementById("player2-name").value;
-        console.log(playerOneName);
-        console.log(playerTwoName);
+        start.player1.name=playerOneName;
+        start.player2.name=playerTwoName;
+        console.log(start.player1.name);
+        console.log(start.player2.name);
+        container.style.display="";
         form.close();
     });
     
