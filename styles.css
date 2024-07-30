@@ -5,27 +5,28 @@ body
     flex-direction: column;
     gap: 1.5rem;
     background-color: lightseagreen;
+    box-sizing: border-box;
+    text-align: center;
 }
 .container
 {
     margin: auto 0;
-    display: flex;
-    justify-content: space-around;
-    gap: 1rem;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 .scores
 {
     display: none;
     flex-direction: column;
     gap: 5rem;
-    /* justify-content: center; */
 }
 .player1-display,.player2-display
 {
     font-size: 3rem;
     font-weight: bold;
 }
-.player1-score,.player2-score
+.player1-score,.player2-score,.result
 {
     font-size: 3rem;
     font-weight: 500;
@@ -43,11 +44,11 @@ button#start-game
     color: rebeccapurple;
     width: -moz-fit-content;
     width: fit-content;
-    align-self: center;
     font-size: 7rem;
     padding: 2rem;
     border-radius: 1rem;
-    margin: auto;
+    margin-top: 35vh;
+    align-self: center;
 }
 .main-menu,.play-again
 {
@@ -57,9 +58,9 @@ button#start-game
 .container-bottom
 {
     display: flex;
-    justify-content: center;
-    gap: 300px;
-    margin: auto;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 50px;
 }
 a
 {
@@ -82,7 +83,7 @@ a
 }
 dialog
 {
-    transform: scale(2);
+    transform: scale(2.5);
 }
 form
 {
