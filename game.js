@@ -60,6 +60,8 @@ function screenController()
 {
     let correct=0;
     let container=document.querySelector(".game-board");
+    const div=document.createElement("div");
+    const div_2=document.createElement("div");
     const body=document.querySelector(".container-bottom");
     const scoreBoard=document.querySelectorAll(".scores");
     const displayPlayerOneName=document.querySelector(".player1-display");
@@ -114,10 +116,20 @@ function screenController()
             {
                 let winner=(start.turnOfPlayer===false) ? start.player1.name : start.player2.name
                 if(winner===start.player1.name)
+                {
                     start.player1.incrementPlayerScore();
+                    div.classList.add("result");
+                    div.textContent=`Winner`;
+                    scoreBoard[0].appendChild(div);
+                }
                 else if(winner===start.player2.name)
+                {
                     start.player2.incrementPlayerScore();
-                alert(`Winner is ${winner}`);
+                    div.classList.add("result");
+                    div.textContent=`Winner`;
+                    scoreBoard[1].appendChild(div);
+                }
+                // alert(`Winner is ${winner}`);
                 playerSelectedBox.forEach(item=> 
                     {
                         item.removeEventListener("click",handlePlayerSelection);
@@ -127,11 +139,17 @@ function screenController()
             }
             else if(start.checkForDraw()===true)
             {
-                alert("draw");
+                // alert("draw");
                 playerSelectedBox.forEach(item=> 
                     {
                         item.removeEventListener("click",handlePlayerSelection);
                     });
+                div.classList.add("result");
+                div_2.classList.add("result");
+                div.textContent=`Draw`;
+                div_2.textContent=`Draw`;
+                scoreBoard[0].appendChild(div);
+                scoreBoard[1].appendChild(div_2);
                 body.appendChild(playAgain);
                 body.appendChild(backButton);
             }
@@ -165,6 +183,8 @@ function screenController()
             });
         correct=0;
         start.turnOfPlayer=false;
+        div.remove();
+        div_2.remove();
     });
 
     backButton.addEventListener("click",event=>{
