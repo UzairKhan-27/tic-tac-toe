@@ -77,8 +77,8 @@ a
     justify-content: center;
     align-items: center;
     display: flex   ;
-    border-right: solid 2px black;
-    border-bottom: solid 2px black;
+    border-right: solid 4px black;
+    border-bottom: solid 4px black;
 }
 
 [id="3"],[id="6"],[id="9"]
