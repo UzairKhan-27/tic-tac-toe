@@ -4,7 +4,7 @@ body
     height: 100vh;
     flex-direction: column;
     gap: 1.5rem;
-    background-color: lightseagreen;
+    background-color: lightblue;
     box-sizing: border-box;
     text-align: center;
 }
@@ -41,7 +41,8 @@ body
 }
 button#start-game
 {
-    color: rebeccapurple;
+    color: white;
+    background-color: #113f67;
     width: -moz-fit-content;
     width: fit-content;
     font-size: 7rem;
@@ -54,6 +55,12 @@ button#start-game
 {
     font-size: 1.3rem;
     padding: 1rem;
+    background-color: #113f67;
+    color: white;
+}
+.main-menu:hover,.play-again:hover,a:hover,button#start-game:hover
+{
+    background-color: maroon;
 }
 .container-bottom
 {
@@ -64,8 +71,8 @@ button#start-game
 }
 a
 {
-    background-color: lightblue;
-    color: maroon;
+    background-color: #113f67;
+    color: #e7eaf6;
     font-size: 8rem;
     justify-content: center;
     align-items: center;
@@ -73,6 +80,7 @@ a
     border-right: solid 2px black;
     border-bottom: solid 2px black;
 }
+
 [id="3"],[id="6"],[id="9"]
 {
     border-right: none;
@@ -84,6 +92,7 @@ a
 dialog
 {
     transform: scale(2.5);
+    background-color: lightskyblue;
 }
 form
 {
